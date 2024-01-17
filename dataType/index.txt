@@ -1,0 +1,18 @@
+// golang的数据类型
+
+// 基本数据类型：
+// 整数类型：int、int8、int16、int32、int64、uint、uint8、uint16、uint32、uint64
+// 浮点类型：float32、float64
+// 布尔类型：bool
+// 字符串类型：string
+// 复数类型：complex64、complex128
+
+
+// 复合数据类型：
+// 数组类型：array
+// 切片类型：slice
+// 结构体类型：struct
+// 指针类型：pointer
+// 通道类型：channel
+// 函数类型：function
+// 接口类型：interface
