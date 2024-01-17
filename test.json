@@ -1,0 +1,18 @@
+{
+  "RegionName": "us-east-1",
+  "RegionEndpoint": "https://ec2.us-east-1.amazonaws.com",
+  "IsRegionalEndpoint": true,
+  "ServiceEndpoints": {
+    "ec2": {
+      "Endpoint": "https://ec2.us-east-1.amazonaws.com",
+      "SigningRegion": "us-east-1"
+    }
+  },
+  "AvailabilityZones": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c"
+  ],
+  "HostedZoneId": "Z3AQPN67Y556C",
+  "Partition": "aws"
+}
