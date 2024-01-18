@@ -298,20 +298,16 @@ func GetInstance() *Singleton {
 	return instance
 }
 
-func main() {
+func UseSlice () {
+	MySlice := make([]int, 5, 10)
+	// MySlice[6] = 2
+	fmt.Println("Slice:", MySlice)
 
-	// testSlice()
+	fmt.Println(cap(MySlice), len(MySlice))
 
-	// lock()
+}
 
-	// syncCond()   // error
-
-	// selectCase()
-	// useWaitGroup()
-	// useAsyncRoutine()
-
-	// useSyncRoutine()
-
+func UseMap() {
 	var configMap = map[string]string {
 		"name": "configmap",
 		"aws": "aws",
@@ -335,7 +331,25 @@ func main() {
 		fmt.Print("unmarshal configjson error: ", err)
 	}
 	fmt.Print("configJson: ", configMap1)
+}
+
+func main() {
+
+	// testSlice()
+
+	// lock()
+
+	// syncCond()   // error
+
+	// selectCase()
+	// useWaitGroup()
+	// useAsyncRoutine()
+
+	// useSyncRoutine()
+
 	// useContext()
+
+	UseSlice()
 }
 
 
