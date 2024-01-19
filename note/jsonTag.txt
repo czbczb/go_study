@@ -1,0 +1,35 @@
+required: 表示该字段是必填的，如果字段值为空，将会导致验证失败。
+min: 表示该字段的值必须大于或等于指定的值。
+max: 表示该字段的值必须小于或等于指定的值。
+len: 表示该字段的长度必须大于或等于指定的值，且小于或等于指定的值。
+email: 表示该字段的值必须是有效的电子邮件地址。
+url: 表示该字段的值必须是有效的 URL。
+uuid: 表示该字段的值必须是有效的 UUID。
+regexp: 表示该字段的值必须符合指定的正则表达式。
+
+gt: 表示该字段的值必须大于指定的值。
+ge: 表示该字段的值必须大于或等于指定的值。
+lt: 表示该字段的值必须小于指定的值。
+le: 表示该字段的值必须小于或等于指定的值。
+eq: 表示该字段的值必须等于指定的值。
+ne: 表示该字段的值不能等于指定的值。
+oneof: 表示该字段的值必须是指定的值之一。
+in: 表示该字段的值必须包含在指定的列表中。
+notin: 表示该字段的值不能包含在指定的列表中。
+dive: 表示该字段的值必须是一个有效的 Go 表达式。
+
+type UserInput struct {
+  Age  int    `json:"age" form binding:"gt=18,lt=60"`
+  Name string `json:"name" binding:"oneof=张三 李四 王五"`
+  Price float64 `json:"price" binding:"dive=price > 0 && price <= 1000"`
+  Value string `json:"value" binding:"regexp=^[0-9]+$"`
+  UUID string `json:"uuid" binding:"uuid"`
+  URL string `json:"url" binding:"url"`
+  Email string `json:"email" binding:"email"`
+  password string `json:"password"required,min=3,max=10"`
+
+
+  test string `json:"-"`   不论什么时候，test都不会在json里面出现
+  test2 string `json:"test2" form: "test2" binding: "omitempty"`    // 当test2为空时不在json中出现
+}
+
