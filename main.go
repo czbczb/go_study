@@ -334,8 +334,19 @@ func UseMap() {
 }
 
 
+// golang面试题：翻转含有中文、数字、英文字母的字符串
+func ReserveStr() {
+	str := "我是中国人and123@654"
 
+	demoRune := []rune(str)
 
+	for i, j := 0, len(demoRune) - 1; i<j; i, j = i+1, j - 1 {
+		demoRune[i], demoRune[j] = demoRune[j], demoRune[i]
+	}
+
+	fmt.Println("demoRune: ", demoRune)
+	fmt.Println("demo str", string(demoRune))
+}
 
 
 func main() {
@@ -354,7 +365,9 @@ func main() {
 
 	// useContext()
 
-	UseSlice()
+	// UseSlice()
+
+	ReserveStr()
 }
 
 

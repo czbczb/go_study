@@ -1,0 +1,64 @@
+一、array和slice的区别
+  1、长度，array固定，slice可变
+  2、类型，array固定（同一种类型），slice可以不同
+  3、扩容，array不可以，slice可以
+  4、初始化，array需要指定长度，slice可以不指定
+  5、访问元素，都可以通过下标访问，但是slice可以通过make函数返回的slice访问
+
+
+二、零切片、空切片、nil切片是什么？
+   答：
+    零切片：len和capacity都为0的切片                     slice := make([]int, 0)        slice := []int{}
+    空切片：len为0，capacity不为0                       slice := make([]int, 0, 10)    slice := []int{0, 0, 0}
+    nil切片：len和capacity都为0，  并且底层数组为nil      slice := nil                   slice := make([]int)
+
+
+三、slice深拷贝和浅拷贝？
+  答：slice是引用类型，默认是浅拷贝
+                 a := []int{1, 2, 3}
+    浅拷贝        b := a
+    深度拷贝1     b := make([]int, len(a))       copy(b, a)
+    深度拷贝2     b := reflect.DeepCopy(a)
+
+
+  深度拷贝的两种方式
+    1、使用make()函数创建一个新的slice，并使用copy()函数将原始slice的数据复制到新的slice中。
+    2、使用reflect包中的DeepCopy()函数。
+
+
+四、Golang中map的扩容时机是在向map中插入新元素时，如果满足以下两个条件之一，就会触发扩容：
+
+装载因子超过阈值。装载因子是指map中元素的个数与bucket的个数之比。Golang中map的装载因子阈值为6.5。
+overflow的bucket数量过多。overflow的bucket是指hash函数计算出的hash值对应的bucket中没有元素。当B小于等于15时，overflow的bucket的数量大于2B，当B大于15时，overflow的bucket的数量大于215。
+具体来说，在向map中插入新元素时，会先计算出装载因子：
+
+loadFactor := len(m) / uint64(cap(m.buckets))
+如果装载因子超过阈值，则会触发扩容。扩容后的map的bucket数量将翻倍。
+
+如果overflow的bucket数量过多，则会触发扩容。扩容后的map的bucket数量将增加一个数量级（10-100， 100-1000）。
+
+
+五、map的扩容策略
+  Golang中map的扩容策略是渐进式扩容。渐进式扩容是指在扩容时，并不会一次性将所有数据迁移到新的bucket中，而是每次最多只会迁移两个bucket的数据。
+
+  渐进式扩容有以下优点：
+
+  可以减少扩容时对map的性能影响。
+  可以提高扩容的效率。
+  Golang中map的扩容过程如下：
+
+  创建一个新的bucket数组，新的bucket数组的大小是原bucket数组大小的两倍。
+  将原bucket数组中的元素逐个迁移到新的bucket数组中。
+  将原bucket数组释放。
+  Golang中map的扩容是通过grow()函数实现的。grow()函数会返回一个新的map，新的map的bucket数组是原map的bucket数组的两倍。
+
+六、 特性	       make	                 new
+    返回类型	   类型本身	              指向类型的指针
+    作用	      分配和初始化引用类型	   分配任意类型的内存
+    初始化方式	 初始化容量和元素值	      将内存清零
+
+七、拷贝大切片一定比小切片代价大吗？
+  并不是，所有切片的大小相同；三个字段（一个 uintptr，两个int）。切片中的第一个字是指向切片底层数组的指针，这是切片的存储空间，第二个字段是切片的长度，第三个字段是容量。将一个 slice 变量分配给另一个变量只会复制三个机器字。所以 拷贝大切片跟小切片的代价应该是一样的。
+  
+
+
