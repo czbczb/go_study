@@ -368,6 +368,11 @@ func main() {
 	// UseSlice()
 
 	ReserveStr()
+
+		var s = "世界"
+		var demo = []byte(s)
+    fmt.Println(len(s)) // 6
+    fmt.Println(len(demo)) // 6
 }
 
 
