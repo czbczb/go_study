@@ -6,3 +6,18 @@
 二、对未初始化的chanel进行读写会导致panic
   未初始化的chan的类型是nil，nil chan没有底层的存储空间，因此任何对nil chan的读写操作都会导致panic。
 
+
+三、empty struct的妙用
+The size of a struct is the sum of the size of the types of its fields, since there are no fields: no size!
+
+
+Basically you are declaring an array of empty structs, which occupies no storage.
+
+  用法：
+	done := make(chan struct{}, 0)
+  不会占用内存，no size
+
+  使用场景：
+  As a general rule, every time you have channels used to signal something, rather than exchanging values, you can use empty structs.
+
+
